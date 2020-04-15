@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+
+  <a href="{% url 'things:list' %}">back to list</a>
+  <h1>New Thing</h1>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Speichern">
+    </form>
+
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+
+{% endblock javascript %}

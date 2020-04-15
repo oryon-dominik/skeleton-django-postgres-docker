@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+
+<h1>Thing Update</h1>
+
+    <br>
+    id: {{thing.id}} <br>
+    name: {{thing.name}}<br>
+    group: {{thing.group}}<br>
+
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+  </form>
+
+
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+
+{% endblock javascript %}

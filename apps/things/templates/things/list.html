@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+
+  <a href="{% url 'things:create' %}">New Thing</a>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for thing in things %}
+        <tr>
+          <td>
+            {{thing.name}}
+          </td>
+          <td>
+            <a href="{% url 'things:retrieve' thing.id %}">detail</a>
+          </td>
+          <td>
+            <a href="{% url 'things:update' thing.id %}">update</a>
+          </td>
+          <td>
+            <a href="{% url 'things:delete' thing.id %}">delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+
+{% endblock javascript %}

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "skeleton-django-sqlite-crud"
+version = "0.1.0"
+description = "providing a basic django structure to start your projects with a simple CRUD app"
+authors = ["oryon-dominik <oryon@cyberise.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.0.5"
+django-environ = "^0.4.5"
+django-extensions = "^2.2.9"
+django-crispy-forms = "^1.9.0"
+
+[tool.poetry.dev-dependencies]
+jupyter = "^1.0.0"
+hide_code = "^0.5.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0a5"]
+build-backend = "poetry.core.masonry.api"

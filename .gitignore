@@ -1,0 +1,30 @@
+## GIT is ignoring... (# Created by oryon-dominik)
+
+# git itself
+/.git/*
+
+# all logs
+*.log
+!requests.log
+
+# vscode/settings
+/.vscode/*
+# .code-workspace
+
+# local-config
+/.env
+
+# migrations are only committed for production
+**/migrations/
+!**/migrations/__init__.py
+
+# the database is only committed for production
+database/sqlite.db
+
+# jupyter
+notebooks/.ipynb_checkpoints/
+
+### Python ###
+# precompiled
+__pycache__/
+*.py[cod]

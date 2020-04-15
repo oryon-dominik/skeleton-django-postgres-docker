@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+  {# Fonts #}
+  <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+  {% block css %}
+  <link rel="stylesheet" href="{% static 'css/project.css' %}">
+  {% endblock %}
+
+  <title>{% block title %}{{ settings.TITLE }}{% endblock title %}</title>
+
+  <meta charset="utf-8">
+
+</head>
+
+<body class="body">
+
+<header class="header">
+  <!--Main Navigation-->
+  <nav class="navigation">
+  {% if request.user.is_authenticated %}
+    {{ request.user.username }}
+    <a href="{% url 'users:logout' %}">logout</a>
+  {% else %}
+    please authenticate:
+    <a href="{% url 'users:login' %}">login</a>
+  {% endif %}
+  </nav>
+</header>
+
+<!-- Messages -->
+<div class="messages">
+  {% if messages %}
+  {% for message in messages %}
+    {% if message.tags %}{{ message.tags }}{% endif %}
+      {{ message }}
+  {% endfor %}
+  {% endif %}
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    {% block body %}
+    {% block outer_content %}
+    <div class="content">
+      {% block content %}
+      {% endblock content %}
+    </div>
+    {% endblock outer_content %}
+    {% endblock body %}
+    <!-- End Content -->
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <!-- Copyright --><div class="copyright">Cyberise &copy; 2020</div>
+</footer>
+
+{% block javascript %}
+  <script src="{% static 'js/project.js' %}"></script>
+{% endblock javascript %}
+
+</body>
+
+</html>

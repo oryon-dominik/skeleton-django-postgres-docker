@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+
+<a href="{% url 'things:list' %}">back to list</a>
+
+<h1>Mineral Retrieve</h1>
+
+    <br>
+    id: {{thing.id}} <br>
+    name: {{thing.name}}<br>
+    group: {{thing.group}}<br>
+
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+
+{% endblock javascript %}
