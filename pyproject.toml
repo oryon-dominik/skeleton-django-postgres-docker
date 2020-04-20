@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "skeleton-django-sqlite-crud"
+name = "skeleton-django-postgres-docker"
 version = "0.1.0"
-description = "providing a basic django structure to start your projects with a simple CRUD app"
+description = "providing a basic django structure to start your projects with a dockerized CRUD app and postgres"
 authors = ["oryon-dominik <oryon@cyberise.de>"]
 
 [tool.poetry.dependencies]
