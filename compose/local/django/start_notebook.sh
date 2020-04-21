@@ -5,4 +5,5 @@ set -o pipefail
 set -o nounset
 set -o xtrace
 
-JUPYTER_CONFIG_DIR="." cd notebooks && python ../manage.py shell_plus --notebook
+JUPYTER_CONFIG_DIR="."
+python ../manage.py shell_plus --notebook

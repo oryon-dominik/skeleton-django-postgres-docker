@@ -15,7 +15,7 @@
 /.env
 
 # migrations are only committed for production
-**/migrations/
+**/migrations/*
 !**/migrations/__init__.py
 
 # the database is only committed for production
@@ -23,6 +23,7 @@ database/sqlite.db
 
 # jupyter
 notebooks/.ipynb_checkpoints/
+.ipython/
 
 ### Python ###
 # precompiled

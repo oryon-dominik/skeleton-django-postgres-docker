@@ -234,10 +234,10 @@ STATICFILES_FINDERS = [
 IPYTHON_ARGUMENTS = ["--debug", "--settings=config.settings"]
 
 NOTEBOOK_ARGUMENTS = [
-    "--port", "8890",
+    "--port", "8889",
     "--ip", "0.0.0.0",
     "--allow-root",
-    "--notebook-dir", "notebooks",
+    # "--notebook-dir", "notebooks",
     "--no-browser"
     ]
 # to run the notebook with django 3 async set env DJANGO_ALLOW_ASYNC_UNSAFE=true
