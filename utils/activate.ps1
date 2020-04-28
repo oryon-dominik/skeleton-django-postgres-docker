@@ -1,1 +1,1 @@
-workon skeleton-django-sqlite-minmal-LE1dBSj5-py3.8
+workon skeleton-django-postgres-docker-NrXzNbFn-py3.8
