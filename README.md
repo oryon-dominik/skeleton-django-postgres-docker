@@ -4,9 +4,9 @@
 
 1. clone the repo, delete .git, create a new git repo
 2. setup name & description in `pyproject.toml`
-3. rename and config your `sekeleton.code-workspace` settings
-4. create `logs/requests.log` and setup `.env` (debug=on)
-5. replace `thing` and `Thing` (even the foldernames apps/`things`/templates/`things`) to better suit your app
+3. setup `.env` (debug=on)
+4. replace `thing` and `Thing` (even the foldernames apps/`things`/templates/`things`) to better suit your app
+5. switch to a shell in your venv (e.g: `poetry shell`)
 6. `docker-compose build`
 7. `docker-compose -f docker-compose.yml run --rm django python manage.py makemigrations`
 8. `docker-compose -f docker-compose.yml run --rm django python manage.py migrate`
