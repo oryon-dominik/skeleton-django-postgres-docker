@@ -9,7 +9,7 @@
 
 # vscode/settings
 /.vscode/*
-# .code-workspace
+*.code-workspace
 
 # local-config
 /.env
@@ -25,7 +25,10 @@ database/sqlite.db
 notebooks/.ipynb_checkpoints/
 .ipython/
 
+# poetry lockfile
+poetry.lock
+
 ### Python ###
 # precompiled
-__pycache__/
+**/__pycache__/
 *.py[cod]
