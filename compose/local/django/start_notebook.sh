@@ -6,4 +6,4 @@ set -o nounset
 set -o xtrace
 
 JUPYTER_CONFIG_DIR="."
-python ../manage.py shell_plus --notebook
+cd notebooks && python ../manage.py shell_plus --notebook
