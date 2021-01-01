@@ -1,18 +1,18 @@
 ## GIT is ignoring... (# Created by oryon-dominik)
 
 # git itself
-/.git/*
+.git
 
 # all logs
 *.log
 !requests.log
 
 # vscode/settings
-/.vscode/*
-*.code-workspace
+.vscode
+
 
 # local-config
-/.env
+.env
 
 # migrations are only committed for production
 **/migrations/*
@@ -22,13 +22,12 @@
 database/sqlite.db
 
 # jupyter
-notebooks/.ipynb_checkpoints/
-.ipython/
+.ipynb_checkpoints/
+.ipython
 
-# poetry lockfile
-poetry.lock
 
 ### Python ###
 # precompiled
-**/__pycache__/
+__pycache__
 *.py[cod]
+.pytest_cache

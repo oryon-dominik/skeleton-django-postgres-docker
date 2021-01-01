@@ -5,7 +5,7 @@ description = "providing a basic django structure to start your projects with a 
 authors = ["oryon-dominik <oryon@cyberise.de>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 django = "^3.0.5"
 django-environ = "^0.4.5"
 django-extensions = "^2.2.9"
