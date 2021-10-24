@@ -15,6 +15,7 @@
 # local-config
 .env
 .secrets
+.production.env
 
 # don't ignore migrations
 !**/migrations/__init__.py

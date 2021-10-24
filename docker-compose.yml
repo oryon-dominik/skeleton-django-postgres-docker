@@ -40,7 +40,7 @@ services:
     environment:
         - DJANGO_ALLOW_ASYNC_UNSAFE=true
     ports:
-      - "8889:8889"
+      - "8888:8888"
     networks:
       - thing
     command: /start_notebook.sh
