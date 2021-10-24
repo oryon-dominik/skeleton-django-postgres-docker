@@ -17,15 +17,13 @@ set -o xtrace
 cd /app
 python manage.py migrate
 
-$develop=true
-
 # production start via gunicorn
 # $develop=false
 # mkdir -p ./staticfiles
 # python manage.py collectstatic --noinput
 # gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 300
 
-while $develop; do
+while $DEVELOP; do
   echo "Re-starting Django runserver"
     # regular start
   # python manage.py runserver 0.0.0.0:8000

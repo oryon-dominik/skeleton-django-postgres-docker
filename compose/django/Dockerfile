@@ -1,5 +1,8 @@
 FROM python:3.10-slim
 
+# Set development mode. (poetry packages install..)
+ARG DEBUG=true
+
 # ---- SYSTEM & BUILD-REQUIREMENTS --------------------------------------------
 RUN export DEBIAN_FRONTEND=noninteractive && \
     # get rid of ERROR: debconf: unable to initialize frontend: Dialog
@@ -38,7 +41,7 @@ RUN chown $USER:$GROUPID /start.sh
 
 # Jupyter notebook
 RUN mkdir --parents /root/.jupyter
-COPY ./compose/jupyter/jupyter_notebook_config.py /root/.jupyter
+COPY ./compose/jupyter/jupyter_notebook_config.py /app/.ipython
 COPY ./compose/jupyter/start_notebook.sh /start_notebook.sh
 RUN sed --in-place 's/\r//' /start_notebook.sh
 RUN chmod +x /start_notebook.sh
@@ -58,6 +61,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y curl \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
 RUN root/.local/bin/poetry completions bash > /etc/bash_completion.d/poetry.bash-completion
 ENV PATH=root/.local/bin/:$PATH
+
+RUN python -m ipykernel install --user --name $USER --display-name $USER
 
 # Cleaning up unused files
 RUN apt-get purge --assume-yes --auto-remove --option APT::AutoRemove::RecommendsImportant=false \

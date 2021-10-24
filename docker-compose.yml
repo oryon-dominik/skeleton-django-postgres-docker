@@ -2,9 +2,9 @@ version: '3.8'
 
 volumes:
   postgres_data_local:
-    name: "thig_postgres_data"
+    name: "thing_postgres_data"
   postgres_backup_local: 
-    name: "thig_postgres_backup"
+    name: "thing_postgres_backup"
 
 services:
   django: &django
@@ -18,15 +18,11 @@ services:
     env_file:
       - ./.envs/.django
       - ./.envs/.postgres
-    environment:
-      - POSTGRES_USER=thing
-      - USE_DOCKER=yes
-      - DJANGO_SETTINGS_MODULE=config.settings
     command: /start.sh
     networks:
       - thing
     ports:
-      - "8000:8000"
+      - "8084:8000"
 
   notebook:
     <<: *django
@@ -40,7 +36,7 @@ services:
     environment:
         - DJANGO_ALLOW_ASYNC_UNSAFE=true
     ports:
-      - "8888:8888"
+      - "8878:8888"
     networks:
       - thing
     command: /start_notebook.sh

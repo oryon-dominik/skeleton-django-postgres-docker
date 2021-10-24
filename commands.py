@@ -104,20 +104,24 @@ def black(path: str = typer.Argument(None)):
     run_command(command, debug=DEBUG)
 
 @cli.command()
-def pytest(test_path: str = typer.Argument(None)):
+def pytest(test_path: str = typer.Argument(None), quiet: bool = False, create_db: bool = False):
     """pytest <path>"""
-    command = "pytest"
+    command = f"docker compose -f {COMPOSE_FROM} run django pytest"
     if test_path is not None:
-        command = f"{command} {test_path}"
+        command += f" {test_path}"
+    if quiet:
+        command += " --quiet"
+    if create_db:
+        command += " --create-db"
     run_command(command, debug=DEBUG)
 
 @cli.command()
 def run_coverage(skip: bool = False):
     """test coverage"""
     commands = [
-        "coverage run --source=./application --module pytest",
-        "coverage report -mi",
-        "coverage html"
+        "docker compose -f {COMPOSE_FROM} run django coverage run --source=./application --module pytest",
+        "docker compose -f {COMPOSE_FROM} run django coverage report -mi",
+        "docker compose -f {COMPOSE_FROM} run django coverage html"
     ]
     # TODO: fixme, this is broken: commands[0] += " --skip-empty" if skip else ""
     for command in commands:
@@ -131,12 +135,12 @@ def coverage(skip: bool = False):
     run_coverage(skip=skip)
 
 @cli.command()
-def test(test_path: str = typer.Argument(None), coverage: bool = False, skip: bool = False):
+def test(test_path: str = typer.Argument(None), coverage: bool = False, skip: bool = False, create_db: bool = False):
     """test --coverage"""
     if coverage:
         run_coverage(skip=skip)
     else:
-        pytest(test_path)
+        pytest(test_path=test_path, create_db=create_db)
 
 @cli.command()
 def rebuild():
@@ -289,7 +293,7 @@ def run(orphans: bool = False):
     Via docker.
 
     """
-    command = f"docker compose {COMPOSE_FROM} up"
+    command = f"docker compose -f {COMPOSE_FROM} up"
     if orphans:
         command += " --remove-orphans"
     run_command(command, debug=DEBUG)
@@ -338,7 +342,7 @@ def initialize(static: bool = False):
     migrate()
 
     echo(f'Creating pytest DB and running TESTS...', fg_color=typer.colors.GREEN)
-    run_command("pytest --quiet --create-db", debug=DEBUG)
+    pytest(quiet=True, create_db=True)
 
     echo(f'Successfully initialized the project...', fg_color=typer.colors.GREEN)
 

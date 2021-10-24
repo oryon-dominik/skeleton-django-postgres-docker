@@ -14,4 +14,4 @@ set -o nounset
 set -o xtrace
 
 
-JUPYTER_CONFIG_DIR="/root/.jupyter" && python manage.py shell_plus --notebook
+JUPYTER_CONFIG_DIR="/app/.ipython" && python manage.py shell_plus --notebook

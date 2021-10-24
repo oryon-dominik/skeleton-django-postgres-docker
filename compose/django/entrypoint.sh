@@ -3,39 +3,35 @@
 # Exit immediately if a command exits with a non-zero status.
 set -o errexit
 
-# The return value of a pipeline is the status of the last command to exit with
-# a non-zero status, or zero if no command exited with a non-zero status
-set -o nounset
-
 cmd="$@"
 
 # the official postgres image uses 'postgres' as default user if not set explictly.
-if [ -z "${POSTGRES_USER}" ]; then
+if [ -z $POSTGRES_USER ]; then
     base_postgres_image_default_user='postgres'
     export POSTGRES_USER="${base_postgres_image_default_user}"
 fi
 
-if [ -z "$POSTGRES_DB" ]; then
+if [ -z $POSTGRES_DB ]; then
     echo "env: POSTGRES_DB not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_PASSWORD" ]; then
+if [ -z $POSTGRES_PASSWORD ]; then
     echo "env: POSTGRES_PASSWORD not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_HOST" ]; then
+if [ -z $POSTGRES_HOST ]; then
     echo "env: POSTGRES_HOST not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_PORT" ]; then
+if [ -z $POSTGRES_PORT ]; then
     echo "env: POSTGRES_PORT not set"
     exit 1
 fi
 
-if [ -z "$DATABASE_URL" ]; then
+if [ -z $DATABASE_URL ]; then
     export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
 fi
 

@@ -4,7 +4,7 @@
 .git/
 
 # all logs
-*/logs/*.log
+**/logs/*.log
 
 # macOS
 .DS_Store

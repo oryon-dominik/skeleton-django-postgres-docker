@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "skeleton-django-postgres-docker"
-version = "0.2.0"
+version = "0.2.5"
 description = "providing a basic django structure to start your projects with a dockerized CRUD app and postgres"
 authors = ["oryon-dominik <oryon@cyberise.de>"]
+readme = './README.md'
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -21,6 +22,38 @@ black = "^21.9b0"
 pytest = "^6.2.5"
 coverage = "^6.0.2"
 rich = "^10.12.0"
+ipython = "^7.28.0"
+
+[tool.black]
+line-length = 119
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+addopts = "--nomigrations --reuse-db -p no:warnings"
+python_files = "tests.py test_*.py *_tests.py"
+norecursedirs = ".git staticfiles docs assets logs media notebooks"
+
+[tool.flake8]
+statistics = "True"
+ignore = ["D203" , "W503"]
+exclude = '''
+    **/migrations/*,
+    .git,
+    '''
+max-line-length = 119
 
 [build-system]
 requires = ["poetry-core>=1.0.7"]

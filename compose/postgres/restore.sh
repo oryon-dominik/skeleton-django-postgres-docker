@@ -13,22 +13,22 @@ then
     exit 1
 fi
 
-if [ -z "$POSTGRES_PASSWORD" ]; then
+if [ -z $POSTGRES_PASSWORD ]; then
     echo "env: POSTGRES_PASSWORD not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_DB" ]; then
+if [ -z $POSTGRES_DB ]; then
     echo "env: POSTGRES_DB not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_PASSWORD" ]; then
+if [ -z $POSTGRES_PASSWORD ]; then
     echo "env: POSTGRES_PASSWORD not set"
     exit 1
 fi
 
-if [ -z "$POSTGRES_HOST" ]; then
+if [ -z $POSTGRES_HOST ]; then
     echo "env: POSTGRES_HOST not set"
     exit 1
 fi

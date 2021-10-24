@@ -6,11 +6,11 @@ import sys
 
 def main():
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.production')
 
     if len(sys.argv) > 1 and sys.argv[1] == "test":
         print("switching to test mode")
-        os.environ["DJANGO_SETTINGS_MODULE"] = "config.test"
+        os.environ["DJANGO_SETTINGS_MODULE"] = "config.settings.test"
 
     try:
         from django.core.management import execute_from_command_line
@@ -27,10 +27,10 @@ def main():
                 "forget to activate a virtual environment?"
             )
         raise
-        
+
     # This allows easy placement of apps within the interior apps directory.
     current_path = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(os.path.join(current_path, "apps"))    
+    sys.path.append(os.path.join(current_path, "apps"))
 
     execute_from_command_line(sys.argv)
 
