@@ -46,24 +46,24 @@ Look up all other control-commands for the project via `cc --help` or glimpse in
 
 Example implementation of the `cc <command>` alias in a `powershell` script:
 
-    ```powershell
-    function cc () {
-        $commands = ".\commands.py"
-        $cwd = (Get-Location)
-        $parent = Split-Path -Path $cwd
-        if (Test-Path $commands -PathType leaf) {
-            python commands.py $args
-        }
-        elseif (Test-Path (Join-Path -Path $parent -ChildPath $commands) -PathType leaf) {
-            Set-Location $parent
-            python commands.py $args
-            Set-Location $cwd
-        }
-        else {
-            Write-Host "commands.py not found" 
-        }
+```powershell
+function cc () {
+    $commands = ".\commands.py"
+    $cwd = (Get-Location)
+    $parent = Split-Path -Path $cwd
+    if (Test-Path $commands -PathType leaf) {
+        python commands.py $args
     }
-    ```
+    elseif (Test-Path (Join-Path -Path $parent -ChildPath $commands) -PathType leaf) {
+        Set-Location $parent
+        python commands.py $args
+        Set-Location $cwd
+    }
+    else {
+        Write-Host "commands.py not found" 
+    }
+}
+```
 
 ## other skeletons
 
