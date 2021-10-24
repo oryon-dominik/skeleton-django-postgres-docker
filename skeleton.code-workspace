@@ -1,0 +1,181 @@
+{
+    "folders": [
+        {   
+            "name": "skeleton-django-postgres-docker",
+            "path": "."
+        }
+    ],
+    "extensions": {
+        "recommendations": [
+            // python extensions
+            "ms-python.vscode-pylance",
+            "ms-python.python",
+            "magicstack.magicpython",
+            "kevinrose.vsc-python-indent",
+            "littlefoxteam.vscode-python-test-adapter",
+            // improved linting
+            "sonarsource.sonarlint-vscode",  // needs installed java runtime
+            "coenraads.bracket-pair-colorizer-2",
+            // database-tools
+            "alexcvzz.vscode-sqlite",
+            // git extensions
+            "mhutchie.git-graph",
+            "eamodio.gitlens",
+            "srmeyers.git-prefix",
+            // useful everyday collaboration
+            "ms-vsliveshare.vsliveshare",
+            "gruntfuggly.todo-tree",
+            "aaron-bond.better-comments",
+            "adpyke.codesnap",
+            "stkb.rewrap",
+        ]
+    },
+    "settings": {
+        // * files ////////////////////////////////////////////////////////////
+        "files.autoSave": "onFocusChange",
+        "files.eol": "\n",
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/_pytest": true,
+            "**/*.egg-info": true,
+            "**/*.dist-info": true,
+            "**/.pytest_cache": true,
+            "**/.ipynb_checkpoints/": true,
+            "**/.ipython": true,
+            "**/.mypy_cache": true,
+        },
+        "files.associations": {
+            "**/*.html": "html",
+            "**/templates/**/*.html": "django-html",
+        },
+        
+        // * python ////////////////////////////////////////////////////////////
+        "python.envFile": "${workspaceFolder:skeleton-django-postgres-docker}/.envs/.production.env",
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length", "119"],
+        "python.terminal.activateEnvironment": true,
+
+        // python test settings
+        "python.testing.cwd": ".",
+        "python.testing.unittestEnabled": false,
+        "python.testing.nosetestsEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestPath": "pytest",
+        // "python.testing.pytestArgs": [  // add args here and in pyproject.toml
+        // ],
+        "python.testing.autoTestDiscoverOnSaveEnabled": true,
+        "pythonTestExplorer.testFramework": "pytest",
+        "testExplorer.sort": "byLocation",
+        "testExplorer.showCollapseButton": true,
+        "testExplorer.showExpandButton": 2,
+        "testExplorer.addToEditorContextMenu": true,
+        "testExplorer.hideWhen": "never",
+
+        // * extension: gitlens ///////////////////////////////////////////////
+        "gitlens.currentLine.enabled": false,
+        "gitlens.hovers.currentLine.over": "line",
+        "gitlens.codeLens.recentChange.enabled": false,
+        "gitlens.codeLens.authors.enabled": false,
+        "gitlens.codeLens.enabled": false,
+        "gitlens.hovers.enabled": false,
+        "gitlens.statusBar.enabled": true,
+        "gitlens.statusBar.command": "gitlens.toggleFileBlame",
+
+        // * extension: errorlens /////////////////////////////////////////////
+        "errorLens.exclude": [
+            "^\".*\" is not accessed$",
+            // "^\"self\" is not accessed$",
+            // "^\"cls\" is not accessed$",
+        ],
+        "errorLens.onSave": true,
+
+        // * extension: TODO-tree /////////////////////////////////////////////
+        "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+        "todo-tree.general.tags" :[
+            "TODO",
+            "FIXME",
+            "HACK",
+            "BUG",
+            "TBD",
+            "WTF",
+            "[ ]",
+            "[x]"
+        ],
+        "todo-tree.highlights.customHighlight": {
+            "TODO": {
+                "type": "tag",
+                "foreground": "magenta",
+                "iconColour": "green",
+            },
+            "FIXME": {
+                "type": "tag",
+                "foreground": "magenta",
+                "icon": "alert",
+                "iconColour": "yellow",
+            },
+            "HACK": {
+                "type": "tag",
+                "icon": "flame",
+                "iconColour": "grey",
+            },
+            "BUG": {
+                "type": "text",
+                "foreground": "red",
+                "icon": "zap",
+                "iconColour": "red",
+            },
+            "TBD": {
+                "type": "tag",
+                "foreground": "magenta",
+                "icon": "organization",
+                "iconColour": "magenta",
+            },
+            "WTF": {
+                "type": "text",
+                "foreground": "orange",
+                "icon": "megaphone",
+                "iconColour": "orange",
+            },
+            "[ ]": {
+                "background": "#ff000080"
+            },
+            "[x]": {
+                "background": "#00ff0080"
+            }
+        },
+
+        // * extension: git-prefix ////////////////////////////////////////////
+        // commit prefixes are helpful for a fast integration of automation tools
+        // "gitPrefix.replacement": "SKELETON-",
+
+        // * launcher-config //////////////////////////////////////////////////
+        "launch": {
+            "version": "0.2.0",
+            "configurations": [
+                // configurations without Docker attachment:
+                // {
+                //     "name": "Python: pytest for Django",
+                //     "type": "python",
+                //     "request": "launch",
+                //     "program": "${workspaceFolder:skeleton-django-postgres-docker}/manage.py",
+                //     "console": "integratedTerminal",
+                //     "args": [
+                //         "test",
+                //     ],
+                //     "django": true
+                // },
+                // {
+                //     "name": "Python: Django",
+                //     "type": "python",
+                //     "request": "launch",
+                //     "program": "${workspaceFolder:skeleton-django-postgres-docker}/manage.py",
+                //     "console": "integratedTerminal",
+                //     "args": [
+                //         "runserver",
+                //     ],
+                //     "django": true
+                // },
+            ]
+        },
+    }
+}

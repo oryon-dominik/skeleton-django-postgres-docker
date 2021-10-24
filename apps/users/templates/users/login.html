@@ -1,37 +1,55 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block meta %}
+{{ block.super }}
+{% comment %} <meta http-equiv="refresh" content="1"> {% endcomment %}
+{% endblock meta %}
+
 
 {% block content %}
 
-<div class="content">
-
-  {% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-
-  {% if next %}
-    {% if user.is_authenticated %}
-    <p>access denied - security clearance required</p>
-    {% else %}
-    <p>login required</p>
+  <div class="flex items-center justify-center">
+  <div class="bg-pink-800 font-bold rounded-lg border shadow-lg p-10">
+  
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
-  {% endif %}
 
-  <form method="post" action="{% url 'users:login' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="Login">
-    <input type="hidden" name="next" value="{{ next }}">
-  </form>
+    {% if next %}
+      {% if user.is_authenticated %}
+      <p>access denied - security clearance required</p>
+      {% else %}
+      <p>login required</p>
+      {% endif %}
+    {% endif %}
 
-</div>
+    <form method="post" action="{% url 'users:login' %}">
+      {% csrf_token %}
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+            {{ form.username.label_tag }}
+          </label>
+          {{ form.username|add_class:"shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"}}
+        </div>
+        <div class="mb-6">
+          <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+            {{ form.password.label_tag }}
+          </label>
+          {{ form.password|add_class:"shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"}}
+          <p class="text-red text-xs italic">Please choose a password.</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <button class="bg-red hover:bg-red-dark text-indigo font-bold py-2 px-4 rounded" type="submit" value="">Sign In</button>
+          <input type="hidden" name="next" value="{{ next }}">
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  </div>
+
+
 
 {% endblock content %}

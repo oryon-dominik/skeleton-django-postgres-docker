@@ -74,6 +74,7 @@ THIRD_PARTY_APPS = [  # order is important!!
     "crispy_forms",
     "crispy_tailwind",
     "django_extensions",
+    'widget_tweaks',
 ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 # local apps shall override djangos default, so order is important

@@ -1,47 +1,96 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta %}
+{{ block.super }}
+{% endblock meta %}
+
 {% block css %}
 {{ block.super }}
-
 {% endblock css %}
+
+
 
 {% block content %}
 
-  <a href="{% url 'things:create' %}">New Thing</a>
+<div class="flex flex-col w-3/4">
+  <div class="px-8 py-12">
+    <h1 class="text-6xl font-bold text-center text-pink-500">Things</h1>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Delete</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
+  <a class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded " href="{% url 'things:create' %}">Add a New Thing</a>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul class="divide-y divide-gray-200">
       {% for thing in things %}
-        <tr>
-          <td>
-            {{thing.name}}
-          </td>
-          <td>
-            <a href="{% url 'things:retrieve' thing.id %}">detail</a>
-          </td>
-          <td>
-            <a href="{% url 'things:update' thing.id %}">update</a>
-          </td>
-          <td>
-            <a href="{% url 'things:delete' thing.id %}">delete</a>
-          </td>
-        </tr>
+      <li class="px-4 py-4 sm:px-6">
+        <a href="{% url 'things:retrieve' thing.id %}" class="block hover:bg-gray-50">
+          <div class="flex items-center justify-between">
+            <p class="text-m font-medium text-indigo-600 truncate">
+              {{thing.name}}
+            </p>
+            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-grey-800">
+              {{thing.id}}
+            </p>
+              
+          </div>
+        </a>
+
+        <div class="mt-1 text-sm">
+          This could be a description..
+        </div>
+
+        <div class="mt-2 flex space-x-4 items-center justify-between">
+          <a class="bg-blue-200 hover:bg-blue-300 text-sm text-white font-bold py-1 px-2 rounded" href="{% url 'things:update' thing.id %}">update</a>
+
+          <div x-data="{ deleteThingModal: false }"><!-- delete-modal using alpine.js -->
+            <a
+              @mouseenter.once="fetch('{% url 'things:delete' thing.id %}')
+                .then(response => response.text())
+                .then(html => { $refs.modal.innerHTML = html })
+              "
+              @click="deleteThingModal = true"
+              class="bg-red-200 hover:bg-red-400 text-sm text-white font-bold py-1 px-2 rounded"
+              >delete</a>
+
+            <div class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+              x-show="deleteThingModal"
+              x-transition:enter="transition duration-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="transition duration-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+              > 
+              <div class="relative sm:w-3/4 md:w-1/2 lg:w-1/3 mx-2 sm:mx-auto my-72 opacity-100">
+                <div
+                  x-ref="modal"
+                  @click.away="deleteThingModal = false"
+                  x-show="deleteThingModal"
+                  x-transition:enter="transition transform duration-300"
+                  x-transition:enter-start="scale-0"
+                  x-transition:enter-end="scale-100"
+                  x-transition:leave="transition transform duration-300"
+                  x-transition:leave-start="scale-100"
+                  x-transition:leave-end="scale-0"
+                  class="relative bg-pink-100 shadow-lg rounded-md text-gray-900 p-3 z-20"
+                ><!-- delete-confirm-template-content spawns here as a modal --></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </li>
       {% endfor %}
-    </tbody>
-  </table>
+    </ul>
+  </div>
+</div>
 
 {% endblock content %}
 
 {% block javascript %}
 {{ block.super }}
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 {% endblock javascript %}

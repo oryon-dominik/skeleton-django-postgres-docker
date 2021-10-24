@@ -3,64 +3,65 @@
 <html lang="de">
 
 <head>
+
+  {% block meta %}
   <meta charset="utf-8">
+  {% endblock meta %}
 
   <link rel="icon" href="{% static 'images/favicon.ico' %}">
-
-  {# Fonts #}
-  <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-
-  {% block css %}
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
   <link rel="stylesheet" href="{% static 'css/project.css' %}">
-  {% endblock %}
 
   <title>{% block title %}{{ TITLE }}{% endblock title %}</title>
 
-  <meta charset="utf-8">
-
 </head>
 
-<body class="body">
+<body class="bg-green-50">
 
 <header class="header">
   <!--Main Navigation-->
-  <nav class="navigation">
-  {% if request.user.is_authenticated %}
-    {{ request.user.username }}
-    <a href="{% url 'users:logout' %}">logout</a>
-  {% else %}
-    please authenticate:
-    <a href="{% url 'users:login' %}">login</a>
-  {% endif %}
+  <nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
+    <div class="mb-2 sm:mb-0">
+      <a href="/" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark">-_Q</a>
+    </div>
+    <div>
+      {% if request.user.is_authenticated %}
+      Logged in as: {{ request.user.username }} | 
+      <a href="{% url 'users:logout' %}" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">logout</a>
+      {% else %}
+      please authenticate:
+      <a href="{% url 'users:login' %}" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2"">login</a>
+      {% endif %}
+    </div>
   </nav>
 </header>
 
 <!-- Messages -->
 <div class="messages">
   {% if messages %}
-  {% for message in messages %}
-    {% if message.tags %}{{ message.tags }}{% endif %}
-      {{ message }}
-  {% endfor %}
+    {% for message in messages %}
+      {% if message.tags %}{{ message.tags }}{% endif %}
+        {{ message }}
+    {% endfor %}
   {% endif %}
 </div>
 
-<!-- Main Container -->
-<div class="container">
-    {% block body %}
-    {% block outer_content %}
-    <div class="content">
+<!-- Main Content -->
+<div class="bg-gray-50 overflow-hidden sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <div class="flex items-center justify-center">
       {% block content %}
+        <!-- Content goes here -->
+        cyber cyber cyber
       {% endblock content %}
     </div>
-    {% endblock outer_content %}
-    {% endblock body %}
-    <!-- End Content -->
+  </div>
 </div>
 
 <!-- Footer -->
 <footer class="footer">
-  <!-- Copyright --><div class="copyright">Cyberise &copy; 2020</div>
+  <div class="pt-40 text-center copyright">cyberise &copy; 2021</div>
 </footer>
 
 {% block javascript %}
