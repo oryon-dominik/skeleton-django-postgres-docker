@@ -12,3 +12,5 @@ DEBUG = False
 ALLOWED_HOSTS = ['testserver']
 
 INSTALLED_APPS += []
+
+TEST_RUNNER = 'config.runners.PytestTestRunner'

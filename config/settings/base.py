@@ -46,6 +46,9 @@ POSTGRES_OPTIONS = ""
 POSTGRES_SSL = "require" if DEBUG else "allow"
 DATABASE_URL = env.str("DATABASE_URL", default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}{POSTGRES_OPTIONS}")
 DATABASES = {"default": env.db("DATABASE_URL", default=DATABASE_URL)}
+# sqlite:
+# DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ROOT_DIR / 'database' / 'sqlite.db'}}
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

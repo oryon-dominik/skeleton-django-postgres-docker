@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "skeleton-django-postgres-docker"
-version = "0.2.5"
+version = "0.2.6"
 description = "providing a basic django structure to start your projects with a dockerized CRUD app and postgres"
 authors = ["oryon-dominik <oryon@cyberise.de>"]
 readme = './README.md'
@@ -15,6 +15,7 @@ psycopg2 = "^2.9.1"
 crispy-tailwind = "^0.5.0"
 Werkzeug = "^2.0.2"
 django-widget-tweaks = "^1.4.9"
+django-debug-toolbar = "^3.2.2"
 
 [tool.poetry.dev-dependencies]
 jupyter = "^1.0.0"

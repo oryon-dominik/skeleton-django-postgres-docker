@@ -49,3 +49,20 @@ NOTEBOOK_ARGUMENTS = [  # to run the notebook with django 3 async set env DJANGO
     "--notebook-dir", "notebooks",
     "--no-browser"
     ]
+
+
+# django-extensions------------------------------------------------------------
+# debug-toolbar
+def show_toolbar(request):
+    return False #True
+
+if DEBUG:
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+    MIDDLEWARE.insert(4, "debug_toolbar.middleware.DebugToolbarMiddleware")
+    # trick to have debug toolbar when developing with docker
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    }
