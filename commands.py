@@ -280,9 +280,17 @@ def create_user(
 @cli.command()
 def shell():
     """
-    Open a shell in the server container.
+    Open a django-shell in the server container.
     """
     command = f"{MANAGE} shell"
+    run_command(command, debug=DEBUG)
+
+@cli.command()
+def bash():
+    """
+    Open a bash in the server container.
+    """
+    command = f"docker compose -f {COMPOSE_FROM} run django /bin/bash"
     run_command(command, debug=DEBUG)
 
 @cli.command()

@@ -22,7 +22,7 @@ services:
     networks:
       - thing
     ports:
-      - "8084:8000"
+      - "8000:8000"
 
   notebook:
     <<: *django
@@ -36,7 +36,7 @@ services:
     environment:
         - DJANGO_ALLOW_ASYNC_UNSAFE=true
     ports:
-      - "8878:8888"
+      - "8888:8888"
     networks:
       - thing
     command: /start_notebook.sh
