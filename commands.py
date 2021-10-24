@@ -104,10 +104,10 @@ def black(path: str = typer.Argument(None)):
     run_command(command, debug=DEBUG)
 
 @cli.command()
-def pytest(test_path: str = typer.Argument(None), quiet: bool = False, create_db: bool = False):
+def pytest(test_path: str = "", quiet: bool = False, create_db: bool = False):
     """pytest <path>"""
     command = f"docker compose -f {COMPOSE_FROM} run django pytest"
-    if test_path is not None:
+    if test_path:
         command += f" {test_path}"
     if quiet:
         command += " --quiet"
@@ -135,7 +135,7 @@ def coverage(skip: bool = False):
     run_coverage(skip=skip)
 
 @cli.command()
-def test(test_path: str = typer.Argument(None), coverage: bool = False, skip: bool = False, create_db: bool = False):
+def test(test_path: str = "", coverage: bool = False, skip: bool = False, create_db: bool = False):
     """test --coverage"""
     if coverage:
         run_coverage(skip=skip)

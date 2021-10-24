@@ -1,8 +1,5 @@
 FROM python:3.10-slim
 
-# Set development mode. (poetry packages install..)
-ARG DEBUG=true
-
 # ---- SYSTEM & BUILD-REQUIREMENTS --------------------------------------------
 RUN export DEBIAN_FRONTEND=noninteractive && \
     # get rid of ERROR: debconf: unable to initialize frontend: Dialog
@@ -62,6 +59,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y curl \
 RUN root/.local/bin/poetry completions bash > /etc/bash_completion.d/poetry.bash-completion
 ENV PATH=root/.local/bin/:$PATH
 
+RUN python -m pip install --user ipykernel
 RUN python -m ipykernel install --user --name $USER --display-name $USER
 
 # Cleaning up unused files
@@ -72,7 +70,7 @@ WORKDIR /app
 
 # Install dependencies
 RUN /root/.local/bin/poetry config virtualenvs.create false \
-    && /root/.local/bin/poetry install $(test ! "$DEBUG" && echo "--no-dev") --no-interaction --no-ansi --no-root
+    && /root/.local/bin/poetry install --no-interaction --no-ansi --no-root  # $(test ! "$DEBUG" && echo "--no-dev")
 
 # Transfer ownership of the application to the user
 RUN chown -R $USER:$GROUPID /app
