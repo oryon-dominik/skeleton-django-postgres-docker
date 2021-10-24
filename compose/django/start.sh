@@ -18,12 +18,12 @@ cd /app
 python manage.py migrate
 
 # production start via gunicorn
-# $develop=false
 # mkdir -p ./staticfiles
 # python manage.py collectstatic --noinput
 # gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 300
 
-while $DEVELOP; do
+# develop start via runserver_plus
+while true; do
   echo "Re-starting Django runserver"
     # regular start
   # python manage.py runserver 0.0.0.0:8000
