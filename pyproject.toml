@@ -44,7 +44,7 @@ exclude = '''
 [tool.pytest.ini_options]
 minversion = "6.0"
 DJANGO_SETTINGS_MODULE = "config.settings.test"
-addopts = "--nomigrations --reuse-db -p no:warnings"
+addopts = "-p no:warnings"
 python_files = "tests.py test_*.py *_tests.py"
 norecursedirs = ".git staticfiles docs assets logs media notebooks"
 
