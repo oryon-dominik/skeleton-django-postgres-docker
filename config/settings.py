@@ -231,7 +231,7 @@ STATICFILES_FINDERS = [
 IPYTHON_ARGUMENTS = ["--debug", "--settings=config.settings"]
 
 NOTEBOOK_ARGUMENTS = [
-    "--port", "8889",
+    "--port", "8889",  # -> docker-compose.yml
     "--ip", "0.0.0.0",
     "--allow-root",
     # "--notebook-dir", "notebooks",

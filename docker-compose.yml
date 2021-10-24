@@ -1,30 +1,32 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
-  postgres_data_local: {}
-  postgres_backup_local: {}
+  postgres_data_local:
+    name: "thig_postgres_data"
+  postgres_backup_local: 
+    name: "thig_postgres_backup"
 
 services:
   django: &django
     build:
       context: .
-      dockerfile: ./compose/local/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile
     depends_on:
       - postgres
     volumes:
-      - .:/app
+      - .:/app:Z
     env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+      - ./.envs/.django
+      - ./.envs/.postgres
     environment:
       - POSTGRES_USER=thing
       - USE_DOCKER=yes
       - DJANGO_SETTINGS_MODULE=config.settings
-    ports:
-      - "8000:8000"
+    command: /start.sh
     networks:
       - thing
-    command: /start
+    ports:
+      - "8000:8000"
 
   notebook:
     <<: *django
@@ -33,8 +35,8 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+      - ./.envs/.django
+      - ./.envs/.postgres
     environment:
         - DJANGO_ALLOW_ASYNC_UNSAFE=true
     ports:
@@ -46,17 +48,19 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./compose/local/postgres/Dockerfile
+      dockerfile: ./compose/postgres/Dockerfile
     volumes:
-      - postgres_data_local:/var/lib/postgresql/data
-      - postgres_backup_local:/backups
+      - postgres_data_local:/var/lib/postgresql/data:Z
+      - postgres_backup_local:/backups:Z
     env_file:
-      - ./.envs/.local/.postgres
+      - ./.envs/.postgres
+    container_name: thing_postgres
     networks:
       - thing
 
 networks:
   thing:
+    name: thing
     ipam:
       driver: default
       config:
