@@ -307,8 +307,16 @@ def run(orphans: bool = False):
     run_command(command, debug=DEBUG)
 
 @cli.command()
-def down():
+def down(volumes: bool = False, orphans: bool = False):
+    """
+    Stops containers and removes containers, networks, volumes, and images created by 'up'.
+    You should do this occassionally to clean up
+    """
     command = "docker compose down"
+    if volumes:
+        command += " --volumes"
+    if orphans:
+        command += " --remove-orphans"
     run_command(command, debug=DEBUG)
 
 @cli.command()
