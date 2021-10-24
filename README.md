@@ -46,6 +46,7 @@ Look up all other control-commands for the project via `cc --help` or glimpse in
 
 Example implementation of the `cc <command>` alias in a `powershell` script:
 
+    ```powershell
     function cc () {
         $commands = ".\commands.py"
         $cwd = (Get-Location)
@@ -62,6 +63,7 @@ Example implementation of the `cc <command>` alias in a `powershell` script:
             Write-Host "commands.py not found" 
         }
     }
+    ```
 
 ## other skeletons
 
