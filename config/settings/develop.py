@@ -48,7 +48,7 @@ NOTEBOOK_ARGUMENTS = [  # to run the notebook with django 3 async set env DJANGO
     "--allow-root",
     "--notebook-dir", "notebooks",
     "--no-browser"
-    ]
+]
 
 
 # django-extensions------------------------------------------------------------
