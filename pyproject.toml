@@ -19,7 +19,6 @@ django-debug-toolbar = "^3.2.2"
 
 [tool.poetry.dev-dependencies]
 jupyter = "^1.0.0"
-hide_code = "^0.5.6"
 typer = "^0.4.0"
 black = "^21.9b0"
 pytest = "^6.2.5"
